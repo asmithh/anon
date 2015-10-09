@@ -1,5 +1,5 @@
 #!/usr/bin/env coffee
-
+fs = require 'fs'
 ipv6          = require 'ipv6'
 async         = require 'async'
 Twit          = require 'twit'
@@ -42,6 +42,7 @@ isIpInRange = (ip, block) ->
     a.isInSubnet(b)
 
 isIpInAnyRange = (ip, blocks) ->
+  #console.log ip
   for block in blocks
     if isIpInRange(ip, block)
       return true
@@ -89,11 +90,12 @@ isRepeat = (edit) ->
   return r
 
 tweet = (account, status, edit) ->
-  console.log status
-  unless argv.noop or (account.throttle and isRepeat(edit))
-    twitter = new Twit account
-    twitter.post 'statuses/update', status: status, (err) ->
-      console.log err if err
+  fs.appendFile('the_worst.txt', status);
+  #console.log "wheeeeeee!"
+  #unless argv.noop or (account.throttle and isRepeat(edit))
+   # twitter = new Twit account
+    #twitter.post 'statuses/update', status: status, (err) ->
+     # console.log err if err
 
 inspect = (account, edit) ->
   if edit.url
@@ -133,15 +135,16 @@ canTweet = (account, error) ->
     error "unable to create twitter client for account: " + account
 
 main = ->
+  console.log "i am a potato"
   config = getConfig argv.config
-  checkConfig config, (err) ->
-    if not err
-      wikipedia = new WikiChanges ircNickname: config.nick
-      wikipedia.listen (edit) ->
-        for account in config.accounts
+ # checkConfig config, (err) ->
+   # if not err
+  console.log "not fucked yet"
+  wikipedia = new WikiChanges ircNickname: config.nick
+	
+  wikipedia.listen (edit) ->
+      for account in config.accounts
           inspect account, edit
-    else
-      console.log err
 
 if require.main == module
   main()
