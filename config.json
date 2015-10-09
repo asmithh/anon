@@ -1,0 +1,36 @@
+{
+  "nick": "yourIrcNickHere",
+  "accounts": [
+    {
+      "consumer_key": "",
+      "consumer_secret": "",
+      "access_token": "",
+      "access_token_secret": "",
+      "template": "{{{page}}} Wikipedia article edited anonymously from {{{name}}} {{&url}}",
+      "ranges": {
+        "MIT main campus": [
+	"18.0.0.0/8"        
+	],
+        "CSAIL/Stata": [
+          "128.30.0.0/15"
+        ],
+	"MIT Guest WiFi": [
+	"192.54.222.0/24"
+	]
+	
+      },
+      "throttle": false,
+      "namespaces": ["article", "file", "media", "main"],
+      "whitelist": {
+        "English Wikipedia": {
+          "Sherrod Brown": true,
+          "Maria Cantwell": true,
+          "Ben Cardin": true,
+          "Tom Carper": true
+        }
+      }
+    }
+  ]
+}
+
+
